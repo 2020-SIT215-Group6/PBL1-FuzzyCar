@@ -1,0 +1,8 @@
+# Features:
+    Cruise Control:
+        - Maintain Set Speed
+        - Collision Avoidance
+        - Vehicle Seperation
+    Steering:
+        - Lane Following
+        - Lane Departure Warning
