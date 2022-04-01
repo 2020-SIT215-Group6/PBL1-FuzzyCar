@@ -1,29 +1,45 @@
-import numpy
-import fuzzylogic.functions
-from matplotlib import pyplot
-from fuzzylogic import *
-from fuzzylogic.truth import *
-from fuzzylogic.rules import *
-from fuzzylogic.hedges import *
-from fuzzylogic.classes import *
-from fuzzylogic.functions import *
-from fuzzylogic.combinators import *
+import numpy as np
+import skfuzzy as fuzz
+import skfuzzy.control as ctrl
 
-from car_velocity import car_velocity
-from object_distance import object_distance
-from object_velocity import object_velocity
+import car
+import object
+import rules.e_braking
 
-from matplotlib import pyplot
+object_distance = object.distance()
+
+object_distance.view()
 
 
-pyplot.rc("figure", figsize=(10, 10))
-
-S = car_velocity()
-D = object_distance()
-V = object_velocity()
-
-S.maintain.plot()
-S.soft.plot()
-S.medium.plot()
-S.emergency.plot()
-pyplot.show()
+# # object_distance = object.distance()
+# # object_speed = object.speed()
+#
+# object_time_to_collision = object.time_to_collision()
+# emergency_braking = car.e_braking()
+#
+# system = ctrl.ControlSystem(rules=rules.e_braking.generate_rules(object_time_to_collision, emergency_braking))
+# sim = ctrl.ControlSystemSimulation(system, flush_after_run=50 * 50 + 1)
+#
+# object_speed.view()
+# object_distance.view()
+# # object_time_to_collision.view()
+# # emergency_braking.view()
+#
+# upsampled = np.linspace(0, 49, 49)
+# x = upsampled
+# y = np.zeros_like(x)
+#
+# # Loop through the system 21*21 times to collect the control surface
+# for i in range(49):
+#     sim.input['time_to_collision'] = x[i]
+#     sim.compute()
+#     y[i] = sim.output['emergency_braking']
+#
+# # Plot the result in pretty 3D with alpha blending
+# import matplotlib.pyplot as plt
+#
+# fig = plt.figure(figsize=(8, 8))
+# ax = fig.add_subplot(111)
+# ax.plot(x, y)
+#
+# plt.show()
