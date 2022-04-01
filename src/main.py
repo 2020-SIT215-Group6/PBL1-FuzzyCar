@@ -1,15 +1,9 @@
-import numpy as np
-import skfuzzy as fuzz
-import skfuzzy.control as ctrl
+import Car
 
-import car
-import object
-import rules.e_braking
 
-object_distance = object.distance()
+car_controller = Car.CarController()
 
-object_distance.view()
-
+car_controller.Object.view_all()
 
 # # object_distance = object.distance()
 # # object_speed = object.speed()
