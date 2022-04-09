@@ -1,0 +1,63 @@
+[System]
+Name='CruiseControl'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Target_Speed'
+Range=[-30 30]
+NumMFs=5
+MF1='Too_Slow':'zmf',[-17.7589852008457 -4.2]
+MF2='Slightly_Too_Slow':'gauss2mf',[3.397 -6 1.699 -4.5]
+MF3='At_Target':'gaussmf',[1.274 0]
+MF4='Slightly_Too_Fast':'gauss2mf',[1.699 4.5 3.397 6]
+MF5='Too_Fast':'smf',[4.2 18.1395348837209]
+
+[Input2]
+Name='Slope'
+Range=[-10 5]
+NumMFs=4
+MF1='Incline':'smf',[-0.1 4.7]
+MF2='Flat':'gaussmf',[1 0]
+MF3='Decline':'gauss2mf',[1.09 -3.84875838201204 0.251 -0.946]
+MF4='Sharp_Decline':'linzmf',[-6.74 -2]
+
+[Input3]
+Name='Collision_Avoidance_Brake_Pressure'
+Range=[0 6]
+NumMFs=5
+MF1='None':'zmf',[0 0.5]
+MF2='Light':'trimf',[0 1.5 3]
+MF3='Medium':'trimf',[1.5 3 4.5]
+MF4='Hard':'trimf',[3 4.5 6]
+MF5='Max':'smf',[5.5 6]
+
+[Output1]
+Name='Acceleration'
+Range=[-3 3]
+NumMFs=5
+MF1='Fast_Deceleration':'trimf',[-3.83 -3.01 -1.59017341040462]
+MF2='Slow_Deceleration':'trimf',[-2.35 -1.25722543352601 -0.25]
+MF3='None':'trimf',[-1 0 1]
+MF4='Slow_Acceleration':'trimf',[0.25 1.448 2.47]
+MF5='Fast_Acceleration':'trimf',[1.8 3 4.2]
+
+[Rules]
+5 0 0, 1 (1) : 1
+1 0 0, 5 (1) : 1
+2 0 0, 5 (1) : 1
+5 0 0, 1 (1) : 2
+5 4 0, 1 (1) : 1
+1 0 0, 5 (1) : 1
+1 0 0, 4 (1) : 1
+1 0 0, 3 (1) : 1
+1 0 0, 2 (1) : 1
+1 0 0, 1 (1) : 1

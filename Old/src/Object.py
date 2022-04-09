@@ -16,14 +16,16 @@ class Object:
         """
         The detected objects distance
         """
+
+        # The universe will be 0 to 100 metres
         universe = np.arange(0, 100, 1)
 
-        # Should really only be emergency braking or not
         distance = Antecedent(universe, "object distance")
 
-        distance["danger"] = trapmf(universe, [0, 0, 30, 50])
-        distance["near"] = trapmf(universe, [40, 60, 100, 200])
-        distance["far"] = trapmf(universe, [160, 250, 500, 500])
+        # around 30 metres is the danger zone
+        distance["danger"] = trapmf(universe, [0, 0, 20, 30])
+        distance["near"] = trapmf(universe, [20, 30, 45, 60])
+        distance["far"] = trapmf(universe, [45, 55, 100, 100])
 
         return distance
 
@@ -32,14 +34,16 @@ class Object:
         """
         The detected objects relative speed
         """
+
+        # The universe is 0 - 100 km/h
         universe = np.arange(0, 100, 0.1)
 
         # Should really only be emergency braking or not
         speed = Antecedent(universe, "object speed")
 
-        speed["none"] = trimf(universe, [0, 0, 10])
-        speed["slow"] = trimf(universe, [0, 10, 20])
-        speed["medium"] = trimf(universe, [50, 75, 100])
+        speed["none"] = trimf(universe, [0, 0, 5])
+        speed["slow"] = trimf(universe, [2, 5, 15])
+        speed["medium"] = trimf(universe, [5, 40, 70])
         speed["danger"] = trimf(universe, [50, 100, 100])
 
         return speed
@@ -49,14 +53,14 @@ class Object:
         """
         The detected objects relative acceleration
         """
-        universe = np.arange(0, 50, 0.1)
+        universe = np.arange(0, 20, 0.1)
 
         acceleration = Antecedent(universe, "object acceleration")
 
-        acceleration["none"] = trimf(universe, [0, 0, 0.7])
-        acceleration["low"] = trimf(universe, [0, 0, 1])
-        acceleration["warning"] = trimf(universe, [0, 0, 1])
-        acceleration["danger"] = trimf(universe, [0, 0, 1])
+        acceleration["none"] = trimf(universe, [0, 0, 2])
+        acceleration["low"] = trimf(universe, [1, 5, 10])
+        acceleration["warning"] = trimf(universe, [5, 10, 15])
+        acceleration["danger"] = trapmf(universe, [10, 15, 20, 20])
 
         return acceleration
 
